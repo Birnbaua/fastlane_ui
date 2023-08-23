@@ -46,7 +46,19 @@ function QrScanner(props) {
       if(exists) {
          reader.start({ facingMode: "environment" },{qrbox: {width: 250,height: 250},fps: 5},success,error).catch(console.warn('no device'));
       } else {
-         reader.render(success, error);
+         new Html5QrcodeScanner('reader',{
+            qrbox: {
+               width: 250,
+               height: 250
+            },
+            fps: 5
+         }).render(success, error);
+      }
+
+      try {
+         document.getElementById("html5-qrcode-button-camera-permission").click();
+      } catch(err) {
+
       }
       
       function success(result) {
