@@ -1,25 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5QrcodeScanner, Html5Qrcode } from "html5-qrcode";
 
 
 function QrScanner(props) {
 
+   /*
+   if (window.location.protocol == 'http:') {
+      
+      console.log("you are accessing us via "
+          + "an insecure protocol (HTTP). "
+          + "Redirecting you to HTTPS.");
+            
+      window.location.href =
+          window.location.href.replace(
+                  'http:', 'https:');
+  }
+  */
+
    const [scanResult, setScanResult] = useState(null)
 
    useEffect(() => {
-      const scanner = new Html5QrcodeScanner('reader',{
-         qrbox: {
-            width: 250,
-            height: 250
-         },
-         fps: 5,
-      })
+      var exists = false
 
-      scanner.render(success, error);
+      var reader = ""
+      var exists = false
 
+      navigator.mediaDevices
+         .getUserMedia({'video': true})
+         .then((stream) => {
+            reader = new Html5Qrcode('reader')
+            exists = true
+         })
+         .catch((err) => {
+            console.error('No scanning device found...')
+            console.warn("FUCKKKKKK")
+            reader = new Html5QrcodeScanner('reader',{
+               qrbox: {
+                  width: 250,
+                  height: 250
+               },
+               fps: 5
+            })
+         });
+      
+      if(exists) {
+         reader.start({ facingMode: "environment" },{qrbox: {width: 250,height: 250},fps: 5},success,error).catch(console.warn('no device'));
+      } else {
+         reader.render(success, error);
+      }
+      
       function success(result) {
-         scanner.clear()
-         window.location.replace(result);
+         window.location.replace(result)
       }
    
       function error(err) {
