@@ -4,8 +4,6 @@ import { Html5QrcodeScanner } from "html5-qrcode";
 
 function QrScanner(props) {
 
-
-
    const [scanResult, setScanResult] = useState(null)
 
    useEffect(() => {
@@ -29,9 +27,6 @@ function QrScanner(props) {
       }
    },[])
    
-
-
-
    return <div>
       <h1>QR Code Reader</h1>
       <div id='reader'></div>
