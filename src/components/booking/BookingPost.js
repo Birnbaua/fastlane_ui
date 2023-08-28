@@ -13,7 +13,8 @@ function BookingPost(props) {
     const [driverPhone, setDriverPhone] = useState("");
     const [driverEmail, setDriverEmail] = useState("");
     const [maxPayload, setMaxPayload] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [buttonText, setButtonText] = useState("Create");
 
     const checkHandler = () => {
         setEditId(!editId)
@@ -23,6 +24,7 @@ function BookingPost(props) {
         let queryId = new URLSearchParams(window.location.search).get("id")
         if(queryId != null) {
             setId(queryId)
+            setLoading(true)
             fetch(properties.booking + "/" + encodeURIComponent(queryId))
                 .then(response => {
                     return response.json()
@@ -35,6 +37,7 @@ function BookingPost(props) {
                     setDriverPhone(data.driverPhone)
                     setMaxPayload(data.maxPayload)
                     setLicencePlate(data.licencePlate)
+                    setButtonText("Update")
                 })
                 .catch(err => {
                     console.error(err)
@@ -207,7 +210,7 @@ function BookingPost(props) {
                 </div>
             </div>
 
-            <button type="submit" className='btn btn-default' style={{backgroundColor: "green", marginTop: 10}}>Create</button>
+            <button type="submit" className='btn btn-default' style={{backgroundColor: "green", marginTop: 10}}>{buttonText}</button>
         </form>
         </div>
     );
