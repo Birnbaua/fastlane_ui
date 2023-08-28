@@ -4,6 +4,8 @@ import './App.css';
 import QrScanner from './components/scanner/QrScanner';
 import NoPage from './components/NoPage';
 import DriverListview from './components/driver/DriverListview';
+import BookingPost from './components/booking/BookingPost';
+import SuccessPage from './components/booking/SuccessPage';
 
 
 function App() {
@@ -12,6 +14,9 @@ function App() {
       <Routes>          
         <Route path="/scan" element={<QrScanner />} />
         <Route path="/driver" element={<DriverListview />} />
+        <Route path="/driver/reg" element={<BookingPost />} />
+        <Route path="/booking" element={<BookingPost />} />
+        <Route path="/booking/success" element={<SuccessPage />} />
         <Route path="*" element={<NoPage />} />
         <Route path="/" element={
               <div className="App">

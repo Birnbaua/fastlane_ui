@@ -6,7 +6,7 @@ function QrCode(props) {
     const[code, setCode] = useState("")
 
     useEffect(() =>{
-        fetch(properties.qr_code_base_url + "?id=" + props.id)
+        fetch(properties.qr_code_base_url + "?id=" + encodeURIComponent(props.id))
         .then((response) => response.text())
         .then((data) => {
            console.log(data);
@@ -19,7 +19,7 @@ function QrCode(props) {
 
     return (
         <div>
-            <img src={"data:image/png;base64," + code} alt="Red dot" />
+            <img src={"data:image/png;base64," + code} alt="Code" />
         </div>
     );
     
