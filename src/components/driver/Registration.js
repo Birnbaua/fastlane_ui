@@ -14,7 +14,7 @@ function Registration(props) {
         let queryId = new URLSearchParams(window.location.search).get("id")
         if(queryId != null) {
             setId(queryId)
-            fetch(properties.transport_order + "/" + encodeURIComponent(id))
+            fetch(properties.booking + "/" + encodeURIComponent(id))
                 .then(response => {
                     return response.json()
                 })
@@ -24,7 +24,6 @@ function Registration(props) {
                     setDriverName(data.driverName)
                     setMaxPayload(data.maxPayload)
                     setLicencePlate(data.licencePlate)
-                    
                 })
                 .catch(err => {
                     console.error(err)
@@ -35,7 +34,7 @@ function Registration(props) {
     },[])
 
     return (<div>
-        
+
     </div>);
 }
 

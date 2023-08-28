@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { properties } from "../../data/properties";
+import { Alert } from "bootstrap";
 import { redirect, Redirect } from "react-router-dom";
 
 function BookingPost(props) {
@@ -12,6 +13,7 @@ function BookingPost(props) {
     const [driverPhone, setDriverPhone] = useState("");
     const [driverEmail, setDriverEmail] = useState("");
     const [maxPayload, setMaxPayload] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     const checkHandler = () => {
         setEditId(!editId)
@@ -21,44 +23,41 @@ function BookingPost(props) {
         let queryId = new URLSearchParams(window.location.search).get("id")
         if(queryId != null) {
             setId(queryId)
-
+            fetch(properties.booking + "/" + encodeURIComponent(queryId))
+                .then(response => {
+                    return response.json()
+                })
+                .then(data => {
+                    setFrom(data.from.substring(0,16))
+                    setTo(data.to.substring(0,16))
+                    setDriverName(data.driverName)
+                    setDriverEmail(data.driverEmail)
+                    setDriverPhone(data.driverPhone)
+                    setMaxPayload(data.maxPayload)
+                    setLicencePlate(data.licencePlate)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+                setLoading(false)
         }
+        console.log("Test after " + from)
+
     },[])
-
-    let getExisting = async (e) => {
-        e.preventDefault();
-        try {
-            let res = await fetch(properties.booking + "/" + id, {
-                method: "GET"
-            });
-            let resJson = await res.json();
-            if (res.status === 201 || res.status === 200) {
-                /*
-                setDriverName(resJson.driverName),
-                setDriverPhone(resJson.driverPhone),
-                setDriverEmail(resJson.driverEmail),
-                setLicencePlate(resJson.licencePlate),
-                setMaxPayload(resJson.maxPayload),
-                setFrom(resJson.from),
-                setTo(resJson.to)
-                */
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     let handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let res = await fetch(properties.post_booking + "/" + id, {
+            console.log(from + "+" + (new Date(from).getTimezoneOffset()*-1)/60)
+            let res = await fetch(properties.booking + "/" + id, {
                 method: "PUT",
+                headers: new Headers({'content-type': 'application/json'}),
                 body: JSON.stringify({
                     driverName: driverName,
                     driverEmail: driverEmail,
                     driverPhone: driverPhone,
-                    from: from,
-                    to: to,
+                    from: from + "+0" + (new Date(from).getTimezoneOffset()*-1)/60,
+                    to: to + "+0" + (new Date(to).getTimezoneOffset()*-1)/60,
                     tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     licencePlate: licencePlate,
                     maxPayload: maxPayload
@@ -66,20 +65,19 @@ function BookingPost(props) {
             });
             let resJson = await res.json();
             if (res.status === 201 || res.status === 200) {
-                setDriverName("");
-                setDriverEmail("");
+                window.location.href = '/booking/success?id=' + encodeURIComponent(id);
             } else {
-                redirect(encodeURIComponent('/booking/success?id=' + id))
+                alert(res.statusText)
             }
         } catch (err) {
             console.log(err);
-            window.location.href = '/booking/success?id=' + encodeURIComponent(id);
+            alert(err)
         }
     };
 
     useEffect(() =>{
         console.info("From: "+from)
-        if(from != null) {
+        if(from != null && !loading) {
             var str = from;    
             var date = new Date(str);
             date.setHours(date.getHours() + Math.abs(date.getTimezoneOffset()/60) + 2, date.getMinutes(), 0)
