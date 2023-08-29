@@ -1,0 +1,33 @@
+[
+    {
+        "name":"Notruf 112",
+        "file":"notruf.png"
+    },{
+        "name":"Erste-Hilfe-Material",
+        "file":"erste_hilfe_material.png"
+    },{
+        "name":"Brandmelder",
+        "file":"brandmelder.png"
+    },{
+        "name":"Feuerlöscher",
+        "file":"feuerloescher.png"
+    },{
+        "name":"Fluchtweg",
+        "file":"fluchtweg.jpg"
+    },{
+        "name":"Sammelplatz",
+        "file":"sammelplatz.png"
+    },{
+        "name":"Rauchen verboten",
+        "file":"rauchen_verboten.png"
+    },{
+        "name":"Offenes Feuer verboten",
+        "file":"feuer_verboten.png"
+    },{
+        "name":"Zutritt verboten",
+        "file":"zutritt_verboten.png"
+    },{
+        "name":"Gehöhrschutzpflicht",
+        "file":"gehoerschutz.png"
+    }
+]

@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { properties } from "../../data/properties";
+import signs_json from "../../data/img/signs.json";
+import rules_json from "../../data/rules.json";
 
 function Registration(props) {
+    const [signs, setSigns] = useState(signs_json)
+    const [rules, setRules] = useState(rules_json)
     const [id, setId] = useState("");
     const [from, setFrom] = useState(null);
     const [to, setTo] = useState(null);
@@ -69,6 +73,29 @@ function Registration(props) {
                         />
                     </div>
                 </form>
+            </div>
+            <h2 style={{marginTop: 5}}><b>Hinweisschilder</b></h2>
+            {signs.map(function(sign,index) {
+                return <div className="App" id={sign.name}>
+                    <div style={{display: 'flex', width: '100%'}}>
+                        <div style={{  flex: 1, padding: 10}}>
+                            <img alt="notruf" width="100%" src={"/img/signs/"+sign.file} />
+                        </div>
+                        <div class="side side-content-center" style={{flex: 1, padding: 5, display: 'flex', alignItems: 'center'}}>
+                            <div>
+                                <p><h2>{sign.name}</h2></p>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            })}
+            <div>
+                <h2><b>Verhaltensregeln</b></h2>
+                <ul>
+                    {rules.map(function(rule,index) {
+                        return <li>{rule.desc}</li>
+                    })}
+                </ul>
             </div>
         </div>);
 }
