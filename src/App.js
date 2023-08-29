@@ -7,6 +7,7 @@ import DriverListview from './components/driver/DriverListview';
 import BookingPost from './components/booking/BookingPost';
 import SuccessPage from './components/booking/SuccessPage';
 import Registration from './components/driver/Registration';
+import Location from './components/driver/Location';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/scan" element={<QrScanner />} />
         <Route path="/driver" element={<DriverListview />} />
         <Route path="/driver/reg" element={<Registration />} />
+        <Route path="/notFound" element={<NoPage />} />
         <Route path="/booking" element={<BookingPost />} />
         <Route path="/booking/success" element={<SuccessPage />} />
         <Route path="*" element={<NoPage />} />

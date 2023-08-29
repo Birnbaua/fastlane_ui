@@ -9,19 +9,21 @@
     "title":"Sign In",
     "type":"SIGN_IN",
     "desc":"This is desc 2",
-    "is_current":true
+    "is_current":false
 },{
     "no":2,
     "title":"Parking",
     "type":"LOCATION",
+    "img":"P1",
     "desc":"This is desc 2",
     "is_current":false
 },{
     "no":3,
-    "title":"Loading Location",
-    "type":"LOCATION",
+    "title":"Loading",
+    "type":"LOADING",
+    "img":"L3",
     "desc":"This is desc 3",
-    "is_current":false
+    "is_current":true
 },{
     "no":4,
     "title":"EXIT",

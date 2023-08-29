@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { properties } from "../../data/properties";
+import { properties } from "../../data/properties.js";
 import { Alert } from "bootstrap";
 import { redirect, Redirect } from "react-router-dom";
 

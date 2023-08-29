@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { properties } from "../data/properties.js";
+import { properties } from "../../data/properties.js";
 
 function QrCode(props) {
 
@@ -18,12 +18,14 @@ function QrCode(props) {
     },[])
 
     return (
-        <div>
-            <img src={"data:image/png;base64," + code} alt="Code" />
+        <div style={{maxWidth: 500}}>
+            <div className="row" style={{alignContent: 'center'}}>
+                <img alt="facebook" width="90%" src={"data:image/png;base64," + code} />
+            </div>
         </div>
     );
     
 
 }
 
-export default QrCode
+export default QrCode;
