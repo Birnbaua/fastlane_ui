@@ -76,7 +76,7 @@ function DriverListview(props) {
    <div>
       <div className="sticky-top">
         <Accordion allowZeroExpanded="true">
-          <AccordionItem key={-1}> 
+          <AccordionItem key={-9999}> 
             <AccordionItemHeading className={"accordion__heading"}>
               <AccordionItemButton>
                 <img src={qr_icon} alt="process-step-done" width={iconStyle.minWidth} height={iconStyle.minHeight}/>
@@ -90,6 +90,7 @@ function DriverListview(props) {
           </AccordionItem>
         </Accordion>
       </div>
+
       <Accordion allowZeroExpanded="true">
 
         {
@@ -124,24 +125,6 @@ function DriverListview(props) {
               )
             }
           })
-
-          /*
-          steps.map((step, index) => (
-
-            <AccordionItem key={index} dangerouslySetExpanded={step.is_current}> 
-              <AccordionItemHeading className={step.is_current ? "accordion__heading active": "accordion__heading"}>
-                <AccordionItemButton>
-                  <Icon is_current={step.is_current} index={index} />
-                  <span class="menu-item-text">{step.title}</span>
-                </AccordionItemButton>
-              </AccordionItemHeading>
-              
-              <AccordionItemPanel>
-                  This is Option A
-              </AccordionItemPanel>
-            </AccordionItem>
-          ))
-        */
         }
       </Accordion>
    </div>);

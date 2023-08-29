@@ -6,6 +6,8 @@ import rules_json from "../../data/rules.json";
 function Registration(props) {
     const [signs, setSigns] = useState(signs_json)
     const [rules, setRules] = useState(rules_json)
+    const [checkedData, setCheckedData] = useState(false)
+    const [checkedRules, setCheckedRules] = useState(false)
     const [id, setId] = useState("");
     const [from, setFrom] = useState(null);
     const [to, setTo] = useState(null);
@@ -74,7 +76,7 @@ function Registration(props) {
                     </div>
                 </form>
             </div>
-            <h2 style={{marginTop: 5}}><b>Hinweisschilder</b></h2>
+            <h2><b>Hinweisschilder</b></h2>
             {signs.map(function(sign,index) {
                 return <div className="App" id={sign.name}>
                     <div style={{display: 'flex', width: '100%'}}>
