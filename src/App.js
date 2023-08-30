@@ -30,6 +30,7 @@ function App() {
                     <a href='/driver'>Driver</a>
                   </p>
                 </header>
+                <QrScanner></QrScanner>
               </div>
             }>
         </Route>

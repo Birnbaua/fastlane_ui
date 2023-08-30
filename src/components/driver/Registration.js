@@ -43,6 +43,26 @@ function Registration(props) {
         }
     },[])
 
+    let handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(from + "+" + (new Date(from).getTimezoneOffset()*-1)/60)
+            let res = await fetch(properties.driver + "/" + encodeURIComponent(id) +"/acknowledge", {
+                method: "POST",
+                headers: new Headers({'content-type': 'application/json'}),
+            });
+            let resJson = await res.json();
+            if (res.status === 201 || res.status === 200) {
+                window. location. reload();
+            } else {
+                alert(res.statusText)
+            }
+        } catch (err) {
+            console.log(err);
+            alert(err)
+        }
+    };
+
     return (
         <div className="container" >
             <label for='transport-id' style={{marginTop: 30}}><h5><b>Transport order: </b>{id}</h5></label>
@@ -99,6 +119,32 @@ function Registration(props) {
                     })}
                 </ul>
             </div>
+
+
+            <form onSubmit={handleSubmit}>            
+            <label for='transport-id' style={{marginTop: 20}}><h5><b>Bestätigen</b></h5></label>
+            <div className="container border bg-light">
+                <div className="mb-3">
+                    <label for='edit-id'>Daten</label>
+                    <input style={{marginLeft: 5}}
+                        id='edit-id'
+                        type="checkbox"
+                        required={true}
+                        name="Edit:"
+                    />
+                </div>
+                <div className="mb-3">
+                    <label for='edit-id'>Hinweise & Regeln</label>
+                    <input style={{marginLeft: 5}}
+                        id='edit-id'
+                        type="checkbox"
+                        required={true}
+                        name="Edit:"
+                    />
+                </div>
+            </div>
+            <button type="submit" className='btn btn-default' style={{backgroundColor: "green", marginTop: 10}}>Bestätigen</button>
+        </form>
         </div>);
 }
 

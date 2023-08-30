@@ -52,7 +52,7 @@ function BookingPost(props) {
         e.preventDefault();
         try {
             console.log(from + "+" + (new Date(from).getTimezoneOffset()*-1)/60)
-            let res = await fetch(properties.booking + "/" + id, {
+            let res = await fetch(properties.booking + "/" + encodeURIComponent(id), {
                 method: "PUT",
                 headers: new Headers({'content-type': 'application/json'}),
                 body: JSON.stringify({
