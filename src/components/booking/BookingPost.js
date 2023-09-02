@@ -5,6 +5,7 @@ import { redirect, Redirect } from "react-router-dom";
 
 function BookingPost(props) {
     const [id, setId] = useState("");
+    const [carrier, setCarrier] = useState("");
     const [editId, setEditId] = useState(false);
     const [from, setFrom] = useState(null);
     const [to, setTo] = useState(null);
@@ -37,6 +38,7 @@ function BookingPost(props) {
                     setDriverPhone(data.driverPhone)
                     setMaxPayload(data.maxPayload)
                     setLicencePlate(data.licencePlate)
+                    setCarrier(data.carrier)
                     setButtonText("Update")
                 })
                 .catch(err => {
@@ -59,6 +61,7 @@ function BookingPost(props) {
                     driverName: driverName,
                     driverEmail: driverEmail,
                     driverPhone: driverPhone,
+                    carrier: carrier,
                     from: from + "+0" + (new Date(from).getTimezoneOffset()*-1)/60,
                     to: to + "+0" + (new Date(to).getTimezoneOffset()*-1)/60,
                     tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -70,7 +73,7 @@ function BookingPost(props) {
             if (res.status === 201 || res.status === 200) {
                 window.location.href = '/booking/success?id=' + encodeURIComponent(id);
             } else {
-                alert(res.statusText)
+                alert(res.status + " " + res.statusText)
             }
         } catch (err) {
             console.log(err);
@@ -91,7 +94,7 @@ function BookingPost(props) {
 
     return (
         <div className="container">
-        <form onSubmit={handleSubmit}>            
+        <form onSubmit={handleSubmit}>                     
             <label for='transport-id' style={{marginTop: 20}}><h5><b>Transport ID</b></h5></label>
             <div className="container border bg-light">
                 <div className="mb-3" style={{marginTop: 10}}>
@@ -118,6 +121,21 @@ function BookingPost(props) {
                     />
                 </div>
             </div>
+            <label for='transport-id' style={{marginTop: 20}}><h5><b>Carrier Details</b></h5></label>
+            <div className="container border bg-light">
+                <div className="mb-3" style={{marginTop: 10}}>
+                    <label for='carrier'>Name:</label>
+                    <input
+                        id='carrier'
+                        type="text"
+                        className='form-control'
+                        required={true}
+                        value={carrier}
+                        placeholder=""
+                        onChange={(e) => setCarrier(e.target.value)}
+                    />
+                </div>
+            </div>   
             <label for='start-datetime' style={{marginTop: 20}}><h5><b>Time-Window ({Intl.DateTimeFormat().resolvedOptions().timeZone})</b></h5></label>
             <div className="container border bg-light">
                 <div className="mb-3" style={{marginTop: 10}}>

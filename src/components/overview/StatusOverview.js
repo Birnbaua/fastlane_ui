@@ -9,6 +9,20 @@ function StatusOverview(props) {
     const [gateOpen1, setGateOpen1] = useState(false);
     const [gateOpen2, setGateOpen2] = useState(false);
 
+    useEffect(() => {
+        function getOrders() {
+            fetch(properties.StatusOverview)
+              .then(result => result.json())
+              .then(result => setOrders(result))
+              .catch(err => console.error(err))
+          }
+          getOrders()
+          const interval = setInterval(() => getOrders(), 1000*5)
+          return () => {
+            clearInterval(interval);
+          }
+    },[])
+
     /*
     useEffect(() => {
         let queryId = new URLSearchParams(window.location.search).get("id")
@@ -49,6 +63,7 @@ function StatusOverview(props) {
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <th>Carrier</th>
                             <th>From</th>
                             <th>To</th>
                             <th>Status</th>
@@ -60,6 +75,7 @@ function StatusOverview(props) {
                         {orders.map(function(order) {
                             return <tr>
                                 <td>{order.id}</td>
+                                <td>{order.carrier}</td>
                                 <td>{order.from}</td>
                                 <td>{order.to}</td>
                                 <td>{order.status}</td>

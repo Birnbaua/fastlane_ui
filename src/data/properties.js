@@ -1,3 +1,5 @@
+import StatusOverview from "../components/overview/StatusOverview";
+
 const base_url="http://"+window.location.hostname+":8080"
 //const base_url="https://data.birnbaua.at"
 export const properties = {
@@ -5,5 +7,6 @@ export const properties = {
     qr_code_base_url: base_url + "/code/qrcode",
     booking: base_url + "/booking",
     driver: base_url + "/driver",
-    post_booking: base_url + "/booking"
+    post_booking: base_url + "/booking",
+    StatusOverview: base_url + "/statusOverview"
 };
