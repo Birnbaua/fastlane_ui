@@ -11,15 +11,30 @@ function StatusOverview(props) {
 
     useEffect(() => {
         function getOrders() {
-            fetch(properties.StatusOverview)
+            fetch(properties.statusOverview)
               .then(result => result.json())
               .then(result => setOrders(result))
               .catch(err => console.error(err))
           }
           getOrders()
           const interval = setInterval(() => getOrders(), 1000*5)
+
+          function getGateStatus() {
+            fetch(properties.gateStatus)
+              .then(result => result.json())
+              .then(result => {
+                    for (const g of result) { 
+                        if(g.id === "G1") { setGateOpen1(g.isOpen) }
+                        else if(g.id === "G2") { setGateOpen2(g.isOpen)}
+                     }
+              })
+              .catch(err => console.error(err))
+          }
+          getOrders()
+          const interval1 = setInterval(() => getGateStatus(), 1000*5)
           return () => {
             clearInterval(interval);
+            clearInterval(interval1);
           }
     },[])
 
@@ -51,10 +66,10 @@ function StatusOverview(props) {
             <div className="container">
                 <div className="d-flex flex-row-reverse">
                     <div className="col-sm" style={{alignContent: 'center' }}>
-                        <img alt="facebook" width={80} src="/img/other/gate_closed.png" />
+                        <img alt="facebook" width={80} src={gateOpen1 ? "/img/other/gate_open.png" : "/img/other/gate_closed.png"} />
                     </div>
                     <div className="col-sm" style={{alignContent: 'center'}}>
-                        <img alt="facebook" width={80} src="/img/other/gate_closed.png"  />
+                        <img alt="facebook" width={80} src={gateOpen2 ? "/img/other/gate_open.png" : "/img/other/gate_closed.png"}  />
                     </div>
                 </div>
             </div>

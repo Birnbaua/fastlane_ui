@@ -8,5 +8,6 @@ export const properties = {
     booking: base_url + "/booking",
     driver: base_url + "/driver",
     post_booking: base_url + "/booking",
-    StatusOverview: base_url + "/statusOverview"
+    statusOverview: base_url + "/statusOverview",
+    gateStatus: base_url + "/gateStatus"
 };
