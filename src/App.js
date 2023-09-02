@@ -8,6 +8,7 @@ import BookingPost from './components/booking/BookingPost';
 import SuccessPage from './components/booking/SuccessPage';
 import Registration from './components/driver/Registration';
 import Location from './components/driver/Location';
+import StatusOverview from './components/overview/StatusOverview';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/notFound" element={<NoPage />} />
         <Route path="/booking" element={<BookingPost />} />
         <Route path="/booking/success" element={<SuccessPage />} />
+        <Route path="/statusOverview" element={<StatusOverview />} />
         <Route path="*" element={<NoPage />} />
         <Route path="/" element={
               <div className="App">
