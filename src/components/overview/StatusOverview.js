@@ -3,6 +3,7 @@ import { properties } from "../../data/properties.js";
 import { Alert } from "bootstrap";
 import { redirect, Redirect } from "react-router-dom";
 import test_data from '../../data/test/status.json'
+import formatDateEuro from '../../util/DateTime.js'
 
 function StatusOverview(props) {
     const [orders, setOrders] = useState(test_data);
@@ -79,6 +80,7 @@ function StatusOverview(props) {
                         <tr>
                             <th>ID</th>
                             <th>Carrier</th>
+                            <th>Date</th>
                             <th>From</th>
                             <th>To</th>
                             <th>Status</th>
@@ -91,8 +93,9 @@ function StatusOverview(props) {
                             return <tr>
                                 <td>{order.id}</td>
                                 <td>{order.carrier}</td>
-                                <td>{order.from}</td>
-                                <td>{order.to}</td>
+                                <td>{formatDateEuro(order.from)}</td>
+                                <td>{order.from.substring(11,16)}</td>
+                                <td>{order.to.substring(11,16)}</td>
                                 <td>{order.status}</td>
                                 <td>{order.step}</td>
                                 <td>{order.location}</td>
