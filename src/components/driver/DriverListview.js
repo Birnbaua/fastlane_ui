@@ -55,6 +55,7 @@ function DriverListview(props) {
 
    useEffect(() => {
     let queryId = new URLSearchParams(window.location.search).get("id")
+    var interval
     if(queryId != null) {
         setId(queryId)
         fetch(properties.driver + "/" + encodeURIComponent(queryId))
@@ -67,8 +68,26 @@ function DriverListview(props) {
             .catch(err => {
                 console.error(err)
             })
+
+      function getSteps() {
+        fetch(properties.driver + "/" + encodeURIComponent(queryId))
+          .then(response => {
+              return response.json()
+          })
+          .then(data => {
+              setSteps(data.sort((a, b) => a.no - b.no))
+          })
+          .catch(err => {
+              console.error(err)
+          })
+      }
+      getSteps()
+      interval = setInterval(() => getSteps(), 1000*10)
     } else {
       window.location.href = '/notFound?url=' + encodeURIComponent(window.location.href);
+    }
+    return () => {
+      clearInterval(interval);
     }
    },[])
    

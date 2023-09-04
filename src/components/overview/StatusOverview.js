@@ -64,13 +64,18 @@ function StatusOverview(props) {
 
     return (
         <div>
-            <div className="container">
+            <div className="container" style={{backgroundColor: "lightgray", marginTop:10}}>
+                <h1 className="text-center" color="grey">Auftragsübersicht</h1>
+            </div>
+            <div className="container ">
                 <div className="d-flex flex-row-reverse">
                     <div className="col-sm" style={{alignContent: 'center' }}>
                         <img alt="facebook" width={80} src={gateOpen1 ? "/img/other/gate_open.png" : "/img/other/gate_closed.png"} />
+                        <h2>Gate 1 {gateOpen1 ? "open":"closed"}</h2>
                     </div>
                     <div className="col-sm" style={{alignContent: 'center'}}>
                         <img alt="facebook" width={80} src={gateOpen2 ? "/img/other/gate_open.png" : "/img/other/gate_closed.png"}  />
+                        <h2>Gate 2 {gateOpen2 ? "open":"closed"}</h2>
                     </div>
                 </div>
             </div>
