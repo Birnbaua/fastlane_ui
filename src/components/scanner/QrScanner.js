@@ -14,11 +14,9 @@ function QrScanner(props) {
 
    useEffect(() => {
       const successCallback = function success(decodedText, decodedResult) {
-         console.log("TEST TEST TEST")
-         html5QrCode?.stop();
+         const text = decodedText
          console.log(decodedText);
-         console.log(decodedResult);
-         fetch(properties.driver + "/" + encodeURIComponent(decodedText) + props.path,{method: 'POST'})
+         fetch(properties.driver + "/" + encodeURIComponent(text) + props.path,{method: 'POST'})
                 .then(response => {
                     return response.json()
                 })
@@ -31,6 +29,8 @@ function QrScanner(props) {
                   console.error(err)
                   window.location.reload();
                 })
+         html5QrCode?.stop();
+         window.location.href = "/scan"
       }
       
       function error(err) {

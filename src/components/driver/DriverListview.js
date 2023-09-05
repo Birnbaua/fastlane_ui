@@ -24,7 +24,8 @@ function DriverListview(props) {
   const iconStyle = { minWidth: 30, minHeight: 30 };
 
 
-  const [steps, setSteps] = useState(testJson)
+  const [steps, setSteps] = useState([])
+  const [currentLocation, setCurrentLocation] = useState("")
   const [id, setId] = useState(new URLSearchParams(window.location.search).get("id"))
   let current = -1
 
@@ -90,21 +91,41 @@ function DriverListview(props) {
       clearInterval(interval);
     }
    },[])
+
+   useEffect(() => {
+    steps.forEach(step => {
+      if(step.is_current) {
+        console.log("Current step no: " + step.no)
+        if(step.img != null) {
+          setCurrentLocation(step.img)
+        }
+      }
+    });
+   },[steps])
    
    return (
    <div>
       <div className="sticky-top">
         <Accordion allowZeroExpanded="true">
-          <AccordionItem key={-9999}> 
+          <AccordionItem key={-9999} dangerouslySetExpanded={true}> 
             <AccordionItemHeading className={"accordion__heading"}>
               <AccordionItemButton>
                 <img src={qr_icon} alt="process-step-done" width={iconStyle.minWidth} height={iconStyle.minHeight}/>
-                <span class="menu-item-text">QR-Code</span>
+                <span class="menu-item-text">Information</span>
               </AccordionItemButton>
             </AccordionItemHeading>
             
             <AccordionItemPanel>
-                <QrCode id={id}/>
+            <div className="d-flex justify-content-center" style={{maxWidth:"100%"}}>
+                <div className="d-flex flex-row-reverse">
+                    <div className="col-sm" style={{alignContent: 'center', marginRight: 5}}>
+                      {currentLocation ? <Location code={currentLocation} /> : <></>}
+                    </div>
+                    <div className="col-sm" style={{alignContent: 'center', marginRight: 5}}>
+                        <QrCode id={id}/>
+                    </div>
+                </div>
+            </div>
             </AccordionItemPanel>
           </AccordionItem>
         </Accordion>
@@ -123,7 +144,8 @@ function DriverListview(props) {
               );
             } else {
               return (
-                <AccordionItem key={index} dangerouslySetExpanded={step.is_current}> 
+                //<AccordionItem key={index} dangerouslySetExpanded={step.is_current}> 
+                <AccordionItem key={index}> 
                   <AccordionItemHeading className={step.is_current ? "accordion__heading active": "accordion__heading"}>
                     <AccordionItemButton>
                       <Icon is_current={step.is_current} index={index} />
