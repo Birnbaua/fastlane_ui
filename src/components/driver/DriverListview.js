@@ -122,7 +122,7 @@ function DriverListview(props) {
                       {currentLocation ? <Location code={currentLocation} /> : <></>}
                     </div>
                     <div className="col-sm" style={{alignContent: 'center', marginRight: 5}}>
-                        <QrCode id={id}/>
+                        {steps.filter((step) => step.type === 'REGISTRATION' && step.is_current) ? <></> :<QrCode id={id}/>}
                     </div>
                 </div>
             </div>

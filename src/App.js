@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './App.css';
 import QrScanner from './components/scanner/QrScanner';
 import NoPage from './components/NoPage';
-import DriverListview from './components/driver/DriverListview';
+import DriverListview2 from './components/driver/DriverListView2';
 import BookingPost from './components/booking/BookingPost';
 import SuccessPage from './components/booking/SuccessPage';
 import Registration from './components/driver/Registration';
@@ -21,7 +21,7 @@ function App() {
         <Route path="/scan/gate" element={<QrScanner path="/signIn" />} />
         <Route path="/scan/start" element={<QrScanner path="/startLoading" />} />
         <Route path="/scan/end" element={<QrScanner path="/endLoading" />} />
-        <Route path="/driver" element={<DriverListview />} />
+        <Route path="/driver" element={<DriverListview2 />} />
         <Route path="/driver/reg" element={<Registration />} />
         <Route path="/notFound" element={<NoPage />} />
         <Route path="/booking" element={<BookingPost />} />
