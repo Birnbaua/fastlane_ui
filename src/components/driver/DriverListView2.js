@@ -113,7 +113,7 @@ function DriverListview2(props) {
                                   {currentLocation ? <Location code={currentLocation} /> : <></>}
                                 </div>
                                 <div className="col-sm" style={{alignContent: 'center', marginRight: 5}}>
-                                  {steps.filter((step) => step.type === 'REGISTRATION' && step.is_current) ? <></> :<QrCode id={id}/>}
+                                  {steps.filter((step) => step.is_current).length > 0 ? <QrCode id={id}/> : <></>}
                                 </div>
                                 <div>
                                   {steps.filter((step) => step.is_current).length == 0 ? <a>Job finished, thank you for using Fastlane.</a> : <a></a>}
