@@ -237,7 +237,7 @@ function BookingPost(props) {
                     /> 
                 </div>
             </div>            
-            <label for='start-datetime' style={{marginTop: 20}}><h5><b>Cargo Information</b></h5></label>
+            <label for='start-datetime' style={{marginTop: 20}}><h5><b>Cargo Details</b></h5></label>
             <div className="container border bg-light">
                 <div className='mb-3' style={{marginTop: 10}}>
                     <label for='cargo-desc'>Cargo description:</label>
