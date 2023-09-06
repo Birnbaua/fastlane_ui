@@ -22,15 +22,15 @@ function QrScanner(props) {
                 })
                 .then(data => {
                   alert("Successfully scanned")
-                  window.location.reload();
+                  html5QrCode?.stop();
+                  window.location.href = "/scan"
                 })
                 .catch(err => {
                   alert("Scan failed: " + err)
                   console.error(err)
-                  window.location.reload();
+                  html5QrCode?.stop();
+                  window.location.href = "/scan"
                 })
-         html5QrCode?.stop();
-         window.location.href = "/scan"
       }
       
       function error(err) {

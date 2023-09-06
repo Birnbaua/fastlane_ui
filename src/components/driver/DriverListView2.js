@@ -110,7 +110,7 @@ function DriverListview2(props) {
                         <div className="d-flex justify-content-center" style={{maxWidth:"100%"}}>
                             <div className="d-flex flex-row-reverse">
                                 <div className="col-sm" style={{alignContent: 'center', marginRight: 5}}>
-                                  {currentLocation ? <Location code={currentLocation} /> : <></>}
+                                  {currentLocation && steps.filter((step) => step.is_current).length > 0 ? <Location code={currentLocation} /> : <></>}
                                 </div>
                                 <div className="col-sm" style={{alignContent: 'center', marginRight: 5}}>
                                   {steps.filter((step) => step.is_current).length > 0 ? <QrCode id={id}/> : <></>}
