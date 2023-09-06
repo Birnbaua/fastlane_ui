@@ -4,7 +4,6 @@ import done from '../../is_done.png';
 import in_progress from '../../in_progress.png';
 import not_done from '../../not_done.png';
 import qr_icon from '../../qr_code.png';
-import testJson from '../../data/test/steps.json';
 import QrCode from './QrCode.js';
 import {
     Accordion,

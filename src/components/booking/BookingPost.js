@@ -9,6 +9,8 @@ function BookingPost(props) {
     const [editId, setEditId] = useState(false);
     const [from, setFrom] = useState(null);
     const [to, setTo] = useState(null);
+    const [cargoDescription, setCargoDescription] = useState("");
+    const [loadingType, setLoadingType] = useState("unknown");
     const [licencePlate, setLicencePlate] = useState("");
     const [driverName, setDriverName] = useState("");
     const [driverPhone, setDriverPhone] = useState("");
@@ -39,6 +41,8 @@ function BookingPost(props) {
                     setMaxPayload(data.maxPayload)
                     setLicencePlate(data.licencePlate)
                     setCarrier(data.carrier)
+                    setCargoDescription(data.cargoDescription)
+                    setLoadingType(data.loadingType)
                     setButtonText("Update")
                 })
                 .catch(err => {
@@ -62,6 +66,8 @@ function BookingPost(props) {
                     driverEmail: driverEmail,
                     driverPhone: driverPhone,
                     carrier: carrier,
+                    cargoDescription: cargoDescription,
+                    loadingType: loadingType,
                     from: from + "+0" + (new Date(from).getTimezoneOffset()*-1)/60,
                     to: to + "+0" + (new Date(to).getTimezoneOffset()*-1)/60,
                     tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -93,6 +99,10 @@ function BookingPost(props) {
     },[from]);
 
     return (
+        <div>
+        <div className="container" style={{backgroundColor: "lightgray", marginTop:10}}>
+            <h1 className="text-center" color="grey">VFI GmbH</h1>
+        </div>
         <div className="container">
         <form onSubmit={handleSubmit}>                     
             <label for='transport-id' style={{marginTop: 20}}><h5><b>Transport ID</b></h5></label>
@@ -226,10 +236,39 @@ function BookingPost(props) {
                         onChange={(e) => setMaxPayload(e.target.value)}
                     /> 
                 </div>
+            </div>            
+            <label for='start-datetime' style={{marginTop: 20}}><h5><b>Cargo Information</b></h5></label>
+            <div className="container border bg-light">
+                <div className='mb-3' style={{marginTop: 10}}>
+                    <label for='cargo-desc'>Cargo description:</label>
+                    <textarea
+                        id='cargo-desc'
+                        rows={4}
+                        className='form-control'
+                        value={cargoDescription}
+                        placeholder=""
+                        onChange={(e) => setCargoDescription(e.target.value)}
+                    /> 
+                </div>
+                <div className='mb-3' style={{marginTop: 10}}>
+                    <label for='loading-type'>Loading type:</label>
+                    <select
+                        id='loading-type'
+                        className='form-control'
+                        value={loadingType}
+                        onChange={(e) => setLoadingType(e.target.value)}
+                    > 
+                        <option value="loading">Loading</option>
+                        <option value="unloading">Unloading</option>
+                        <option value="combined">Combined</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                </div>
             </div>
 
-            <button type="submit" className='btn btn-default' style={{backgroundColor: "green", marginTop: 10}}>{buttonText}</button>
+            <button type="submit" className='btn btn-default' style={{backgroundColor: "green", marginTop: 10, marginBottom: 10}}>{buttonText}</button>
         </form>
+        </div>
         </div>
     );
 }

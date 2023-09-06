@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { properties } from "../../data/properties.js";
 import { Alert } from "bootstrap";
 import { redirect, Redirect } from "react-router-dom";
-import test_data from '../../data/test/status.json'
 import formatDateEuro from '../../util/DateTime.js'
 
 function StatusOverview(props) {
-    const [orders, setOrders] = useState(test_data);
+    const [orders, setOrders] = useState([]);
     const [gateOpen1, setGateOpen1] = useState(false);
     const [gateOpen2, setGateOpen2] = useState(false);
 
@@ -39,29 +38,6 @@ function StatusOverview(props) {
           }
     },[])
 
-    /*
-    useEffect(() => {
-        let queryId = new URLSearchParams(window.location.search).get("id")
-        if(queryId != null) {
-            setId(queryId)
-            setLoading(true)
-            fetch(properties.booking + "/" + encodeURIComponent(queryId))
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-
-                })
-                .catch(err => {
-                    console.error(err)
-                })
-                setLoading(false)
-        }
-        console.log("Test after " + from)
-
-    },[])
-    */
-
     return (
         <div>
             <div className="container" style={{backgroundColor: "lightgray", marginTop:10}}>
@@ -88,6 +64,7 @@ function StatusOverview(props) {
                             <th>Date</th>
                             <th>From</th>
                             <th>To</th>
+                            <th>Type</th>
                             <th>Status</th>
                             <th>Step</th>
                             <th>Location</th>
@@ -101,6 +78,7 @@ function StatusOverview(props) {
                                 <td>{formatDateEuro(order.from)}</td>
                                 <td>{order.from.substring(11,16)}</td>
                                 <td>{order.to.substring(11,16)}</td>
+                                <td>{order.type}</td>
                                 <td>{order.status}</td>
                                 <td>{order.step}</td>
                                 <td>{order.location}</td>
