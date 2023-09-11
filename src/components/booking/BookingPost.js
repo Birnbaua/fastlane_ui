@@ -106,7 +106,7 @@ function BookingPost(props) {
         <div className="container">
         <form onSubmit={handleSubmit}>                     
             <label for='transport-id' style={{marginTop: 20}}><h5><b>Transport ID</b></h5></label>
-            <div className="container border bg-light">
+            <div className="container border bg-light input-group">
                 <div className="mb-3" style={{marginTop: 10}}>
                     <label for='transport-id'>ID:</label>
                     <input
@@ -120,7 +120,7 @@ function BookingPost(props) {
                         onChange={(e) => setId(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3" style={{marginTop: 50, marginLeft: 10}}>
                     <label for='edit-id'>Edit: </label>
                     <input style={{marginLeft: 5}}
                         id='edit-id'
@@ -147,7 +147,7 @@ function BookingPost(props) {
                 </div>
             </div>   
             <label for='start-datetime' style={{marginTop: 20}}><h5><b>Time-Window ({Intl.DateTimeFormat().resolvedOptions().timeZone})</b></h5></label>
-            <div className="container border bg-light">
+            <div className="container border bg-light input-group">
                 <div className="mb-3" style={{marginTop: 10}}>
                     <label for='start-datetime'>From:</label>
                     <input
@@ -160,7 +160,7 @@ function BookingPost(props) {
                         onChange={(e) => setFrom(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3" style={{marginTop: 10, marginLeft: 10}}>
                     <label for='end-datetime'>To:</label>
                     <input
                         id='end-datetime'
@@ -174,7 +174,7 @@ function BookingPost(props) {
                 </div>
             </div>
             <label for='start-datetime' style={{marginTop: 20}}><h5><b>Driver</b></h5></label>
-            <div className="container border gap-3 bg-light">
+            <div className="container border gap-3 bg-light input-group">
                 <div className='mb-3' style={{marginTop: 10}}>
                     <label for='driver-name'>Name:</label>
                     <input
@@ -186,7 +186,7 @@ function BookingPost(props) {
                         onChange={(e) => setDriverName(e.target.value)}
                     /> 
                 </div>
-                <div className="mb-3">
+                <div className="mb-3" style={{marginTop: 10, marginLeft: 10}}>
                     <label for='driver-phone'>Phone:</label>
                     <input
                         id='driver-phone'
@@ -199,7 +199,7 @@ function BookingPost(props) {
                         onChange={(e) => setDriverPhone(e.target.value)}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-3" style={{marginTop: 10, marginLeft: 10}}>
                     <label for='phone'>Email:</label>
                     <input
                         id='driver-email'
@@ -212,7 +212,7 @@ function BookingPost(props) {
                 </div>
             </div>
             <label for='start-datetime' style={{marginTop: 20}}><h5><b>Vehicle</b></h5></label>
-            <div className="container border bg-light">
+            <div className="container border bg-light input-group">
                 <div className='mb-3' style={{marginTop: 10}}>
                     <label for='licence-plate'>Licence plate:</label>
                     <input
@@ -224,7 +224,7 @@ function BookingPost(props) {
                         onChange={(e) => setLicencePlate(e.target.value)}
                     /> 
                 </div>
-                <div className='mb-3' style={{marginTop: 10}}>
+                <div className='mb-3' style={{marginTop: 10, marginLeft: 10}}>
                     <label for='max-payload'>Maximum payload (tons):</label>
                     <input
                         id='max-payload'

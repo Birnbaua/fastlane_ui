@@ -56,7 +56,7 @@ function StatusOverview(props) {
                 </div>
             </div>
             <div className="container">
-                <table className="table table-striped">
+                <table className="table table-striped"  style={{ fontSize: 30 }}>
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -66,21 +66,19 @@ function StatusOverview(props) {
                             <th>To</th>
                             <th>Type</th>
                             <th>Status</th>
-                            <th>Step</th>
                             <th>Location</th>
                         </tr>
                     </thead>
                     <tbody>
                         {orders.map(function(order) {
-                            return <tr>
-                                <td>{order.id}</td>
+                            return <tr >
+                                <td style={order.id.startsWith("9") == false ? {backgroundColor: "green"} : {}}>{order.id}</td>
                                 <td>{order.carrier}</td>
                                 <td>{formatDateEuro(order.from)}</td>
                                 <td>{order.from.substring(11,16)}</td>
                                 <td>{order.to.substring(11,16)}</td>
                                 <td>{order.type}</td>
                                 <td>{order.status}</td>
-                                <td>{order.step}</td>
                                 <td>{order.location}</td>
                             </tr>
                         })}
