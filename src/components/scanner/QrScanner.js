@@ -10,27 +10,30 @@ function QrScanner(props) {
    const [reader, setReader] = useState(null)
    let html5QrcodeScanner;
    let html5QrCode
-
+   let scanned = false
 
    useEffect(() => {
       const successCallback = function success(decodedText, decodedResult) {
          const text = decodedText
          console.log(decodedText);
-         fetch(properties.driver + "/" + encodeURIComponent(text) + props.path,{method: 'POST'})
-                .then(response => {
-                    return response.json()
-                })
-                .then(data => {
-                  alert("Successfully scanned")
+         if(!scanned) {
+            scanned = true
+            fetch(properties.driver + "/" + encodeURIComponent(text) + props.path,{method: 'POST'})
+               .then(response => {
+                  return response.json()
+               })
+               .then(data => {
                   html5QrCode?.stop();
+                  alert("Successfully scanned")
                   window.location.href = "/scan"
-                })
-                .catch(err => {
+               })
+               .catch(err => {
+                  html5QrCode?.stop();
                   alert("Scan failed: " + err)
                   console.error(err)
-                  html5QrCode?.stop();
                   window.location.href = "/scan"
-                })
+               })
+         }
       }
       
       function error(err) {
@@ -53,10 +56,10 @@ function QrScanner(props) {
       } catch(e) {
 
       }*/
-
+      var size = 250
       if(!html5QrCode?.getState()){
          html5QrCode = new Html5Qrcode("reader");
-         const config = { fps: 5, qrbox: { width: 250, height: 250 }};
+         const config = { fps: 5, qrbox: { width: size, height: size }};
          console.log("TEST")
          // If you want to prefer back camera
          html5QrCode.start({ facingMode: "environment" },config,successCallback,error);
@@ -69,7 +72,7 @@ function QrScanner(props) {
    
    return <div>
       <h1>QR Code Reader</h1>
-      <div id='reader' width={500}></div>
+      <div id='reader'></div>
    </div>
     
 
