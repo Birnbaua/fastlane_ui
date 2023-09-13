@@ -33,11 +33,13 @@ function App() {
                 <header className="App-header">
                   <img src={logo} className="App-logo" alt="logo" />
                   <p>
-                    Test Environment
-                    <a href='/driver'>Driver</a>
+                    Test Environment 
+                    <br/>
+                    <a href='/statusOverview'>Status</a>
+                    <br/>
+                    <a href='/booking'>Booking</a>
                   </p>
                 </header>
-                <QrScanner></QrScanner>
               </div>
             }>
         </Route>
